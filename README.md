@@ -14,7 +14,7 @@ IF Estimation in TensorFlow
 1. Run `Test_Signal_Gen.m` in Matlab and generate a non-stationary signal
 2. Make sure of the parameter configuration of the signal and the signal path ('E:\TF_Test\' is default in windows)
 3. Test the IF estimation by `Test.py` with three parameters `SignalType` `DataPath` and `ModlePath`
-4. For example, `python E:\IF-Estimation\Test.py 1 E:/TF_Test E:\IF-Estimation\models\FH`
+4. For example, `python E:\TF-Enhancement\Test.py 1 E:/TF_Test E:\TF-Enhancement\models\FH`
 
 	SignalType: `1:FH, 2:LFM, 3:SFM`
 

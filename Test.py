@@ -52,7 +52,7 @@ def ImgCon(TF, IMG, Y, Gap):
     a=np.hstack((a,IMG))
     a = np.hstack((a,Gap))
     Y[Y<0]=0
-    Y[Y>128]=255
+    Y[Y>255]=255
     Y = np.reshape( np.uint8(Y), (Sizeh,Sizew) )
     Y = np.hstack((a,Y))
     return Y
@@ -64,11 +64,12 @@ with tf.Session() as sess:
     y_image = tf.get_collection('y_image')[0]
     graph = tf.get_default_graph()
     input_x = graph.get_operation_by_name('input_x').outputs[0]
+    train_flag = graph.get_operation_by_name('train_flag').outputs[0]
   
     for i in range(TF.shape[0]): 
         Ix = np.reshape(TF[i], (1,Size))
         Ic = IMG[0:Sizeh,i:i+Sizew]
-        y = sess.run( y_image, feed_dict={input_x: Ix} )  
+        y = sess.run( y_image, feed_dict={input_x: np.reshape(Ix, (1,Sizeh,Sizew,1)),train_flag:False} )  
         Y = ImgCon(Ix, Ic, y, Gap)
         cv2.imshow("WVD+GroundTurth+Estimation",Y)
         cv2.waitKey(10) 
